@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Shop.Areas.Admin.Models.ViewModels.Shop.OrdersForAdminVM>
+
+@{
+    ViewBag.Title = "Orders";
+}
+
+<h2>Заказы</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Номер заказа
+        </th>
+        <th>
+            Имя пользователя
+        </th>
+        <th>
+            Детали заказа
+        </th>
+        <th>
+            Дата создания
+        </th>
+        <th>
+            Полная стоимость
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.OrderNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserName)
+    </td>
+
+    <td>
+        @foreach (var item2 in item.ProductsAndQty)
+        {
+            @item2.Key @:x @item2.Value <br />
+        }
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedAt)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Total) €
+    </td>
+</tr>
+}
+
+</table>

@@ -1,0 +1,77 @@
+﻿@model Shop.Models.ViewModels.Account.UserVM
+
+@{
+    ViewBag.Title = "Create Account";
+}
+
+<h2>Создать аккаунт</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group offset-md-3">
+            @Html.LabelFor(model => model.FirstName,"Имя", htmlAttributes: new { @class = "control-label col-md-2 " })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+            <br />
+        </div>
+
+        <div class="form-group offset-md-3">
+            @Html.LabelFor(model => model.LastName, "Фамилия", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+            <br />
+        </div>
+
+        <div class="form-group offset-md-3">
+            @Html.LabelFor(model => model.EmailAdress,"Электронный адрес", htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmailAdress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmailAdress, "", new { @class = "text-danger" })
+            </div>
+            <br />
+        </div>
+
+        <div class="form-group offset-md-3">
+            @Html.LabelFor(model => model.UserName, "Логин", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+            <br />
+        </div>
+
+        <div class="form-group offset-md-3">
+            @Html.LabelFor(model => model.Password, "Пароль", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+            <br />
+        </div>
+
+        <div class="form-group offset-md-3">
+            @Html.LabelFor(model => model.ConfirmPassword, "Повтор пароля", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+            <br />
+        </div>
+
+        <div class="form-group offset-md-4">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Создать" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+

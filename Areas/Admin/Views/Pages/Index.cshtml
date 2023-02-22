@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Shop.Models.ViewModels.Pages.PageVM>
+
+@{
+    ViewBag.Title = "Pages";
+}
+
+<h2>Страницы</h2>
+
+@if (TempData["SM"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SM"]
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Создать новую страницу", "AddPage", "", new { @class = "btn btn-success" })
+</p>
+
+<table class="table sorting" id="pages">
+    <tr class="home">
+        <th>
+            Название
+        </th>
+        <th>
+            Краткое описание
+        </th>
+        <th>
+            Боковая панель
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="id_@item.Id" class="@item.Slug">
+            <td>
+                @if (item.Slug != "home")
+                {
+                    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                }
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slug)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasSidebar)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "EditPage", new { id = item.Id }, new { @class = "btn btn-success" }) 
+                @Html.ActionLink("Детали", "PageDetails", new { id = item.Id }, new { @class = "btn btn-info" })
+                @if (item.Slug != "home")
+                {
+
+                    @Html.ActionLink("Удалить", "DeletePage", new { id = item.Id }, new { @class = "delete btn btn-danger" })
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts
+{
+    <script src="~/Content/ShopJS/PagesIndexViewJS.js"></script>
+}

@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Shop.Models.ViewModels.Shop.CategoryVM>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>Категории</h2>
+
+@if (TempData["SM"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SM"]
+    </div>
+}
+
+<div class="new-cat">
+    <div class="input-group mb-3">
+        <div class="input-group-prepared">
+            <span class="input-group-text" id="inputGroup-sizing-default">
+                Имя Категории
+            </span>
+        </div>
+        <input type="text" id="newcatname" class="form-control" />
+    </div>
+    <p>
+        <a href="#" id="newcata" class="btn btn-success">Добавить новую категорию</a>
+        <span class="ajax-text">
+           
+        </span>
+    </p>
+</div>
+
+
+
+
+
+    <table class="table sorting" id="pages">
+        <tr class="home">
+            <th>
+                Название
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr id="id_@item.Id">
+                <td>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="ajaxdivtd"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            @Html.EditorFor(modelItem => item.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </div>
+                    </div>
+                    
+                </td>
+                <td>
+                    @Html.ActionLink("Удалить", "DeleteCategory", new { id = item.Id }, new { @class = "delete btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+@section Scripts
+{
+    <script src="~/Content/ShopJS/CategoriesViewJS.js"></script>
+}

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en" style="
+width: 100%;
+overflow-x: hidden;
+position: absolute;
+left: 0px;
+top: 0px;
+padding-right: 0px;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Shopping Cart</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top " style="background-color: #e3f2fd;">
+        <a class="navbar-brand pl-2" href="/">Гаджет</a>
+        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse mr-auto" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                @Html.Action("PagesMenuPartial", "Pages")
+
+
+
+            </ul>
+          
+            <span class="navbar-nav m-lg-auto">
+
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                <span class="navbar-text">
+                    @Html.ActionLink("Панель админа", "Index", "Dashboard", new { area = "Admin" }, null)
+                </span>
+                    
+                }
+                else
+                {
+                    if (ViewBag.Title != "Cart Details")
+                    {
+                        @Html.Action("CartPartial", "Cart")
+                    }
+
+                }
+
+
+                <span class="navbar-text">&nbsp;&nbsp;&nbsp; </span>
+
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="navbar-text"> @Html.ActionLink("Выйти", "Logout", "Account", null, new { @class = "navbar-text ", style = "text-decoration: none" }) </li>
+                }
+                else
+                {
+                    if (ViewBag.Title == "Login")
+                    {
+                        <li class="navbar-text"> @Html.ActionLink("Войти", "Login", "Account", null, new { @class = "active", style = "text-decoration: none" })</li>
+                    }
+                    else
+                    {
+                        <li class="navbar-text"> @Html.ActionLink("Войти", "Login", "Account", null, new { @class = "navbar-text", style = "text-decoration: none" })</li>
+                    }
+                }
+
+
+
+                @if (Request.IsAuthenticated && User.IsInRole("User"))
+                {
+                    if (ViewBag.Title == "User Profile")
+                    {
+                        <li class="active">@Html.Action("UserNavPartial", "Account", new { area = "" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.Action("UserNavPartial", "Account", new { area = "" })</li>
+                    }
+
+                }
+            </span>
+
+        </div>
+    </nav>
+    <br />
+    <div class="container body-content">
+        <div class="row">
+        
+            <div class="col-sm-12 col-md-3 list-group">
+                @Html.Action("CategoryMenuPartial", "Shop")
+            </div>
+
+            @if (ViewBag.Sidebar == "Yes")
+            {
+                <div class="col">
+                    @RenderBody()
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <br />
+                    @Html.Action("SidebarPartial", "Pages")
+                </div>
+            }
+            else
+            {
+                <duv class="col">
+                    @RenderBody()
+                </duv>
+            }
+
+
+        </div>
+        <hr />
+        <footer>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/scripts")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

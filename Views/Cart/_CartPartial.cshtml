@@ -1,0 +1,7 @@
+﻿@model Shop.Models.ViewModels.Cart.CartVM
+
+<div class="ajaxcart">
+    Корзина: Количество товаров @Model.Quantity - @Model.Price €
+    <br />
+    @Html.ActionLink("Оплата", "Index")
+</div>

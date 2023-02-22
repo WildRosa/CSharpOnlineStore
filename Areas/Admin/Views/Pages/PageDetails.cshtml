@@ -1,0 +1,46 @@
+﻿@model Shop.Models.ViewModels.Pages.PageVM
+
+@{
+    ViewBag.Title = "Page Details";
+}
+
+<h2>Подробная информация о страницах</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Название
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            Краткое описание
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Slug)
+        </dd>
+
+        <dt>
+            Описание
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Body)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "EditPage", new { id = Model.Id }, new { @class = "btn btn-info" }) 
+    
+</p>
+<div>
+    @Html.ActionLink("Вернуться", "Index")
+</div>

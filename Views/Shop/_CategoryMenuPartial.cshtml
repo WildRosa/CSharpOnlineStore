@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Shop.Models.ViewModels.Shop.CategoryVM>
+
+<h3>Категории</h3>
+
+@foreach (var item in Model) {
+    <a class="list-group-item list-group-item-action" href="/Shop/Category/@item.Slug.ToLower()">@item.Name</a>
+}
+
